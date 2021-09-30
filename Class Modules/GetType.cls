@@ -19,6 +19,7 @@ Public Function SelectDataType(DataType As String)
                         Exit Function
                     End If
                     
+                    '##################  BOOL  ##################
                     If DataType = "T_BOOL" Then
                         Element(1) = "Boolean"
                         Element(2) = "0"
