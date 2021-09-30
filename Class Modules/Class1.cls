@@ -9,15 +9,12 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-
 Public Function OPCFormatConfig(Selection As Boolean)
-
     If Selection = True Then
         OPCFormatConfig = True
     End If
     
     If Selection = False Then
         OPCFormatConfig = False
-    End If
-    
+    End If    
 End Function
