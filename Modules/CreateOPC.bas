@@ -12,42 +12,19 @@ Dim AppVars As Variant
 Dim strXML As String
 Dim sLoadStatus As String
 Dim ListBoxValue As Variant
-
-
 Dim sTemp As String
 Dim sTemp1 As String
-
-'Public oXMLFile As MSXML2.DOMDocument
 Public oXMLFile As MSXML2.DOMDocument60
 Public xRootNode As MSXML2.IXMLDOMNode
 Public xNodeList As IXMLDOMNodeList
 Public xDataStructures As IXMLDOMNodeList
 Public statusBit As Integer
- 
 Dim bAllInOne As Boolean
 Dim xClass1 As New Class1
 Dim xtester As Boolean
 
 
-'########################### Create OPC Data  ###########################
-
-'Public Sub OptionButton1_Click()
-
-   'If xClass1.OPCFormatConfig(False) = True Then
-  '      bAllInOne = xClass1.OPCFormatConfig(False)
- '   End If
-    
-'End Sub
-
-'Public Sub OptionButton2_Click()
- 
-   ' If xClass1.OPCFormatConfig(True) = True Then
-  '      bAllInOne = xClass1.OPCFormatConfig(True)
- '   End If
-    
-'End Sub
-
-       
+'########################### Create OPC Data  ###########################       
 Public Sub CreateOPCData()
       
 If Sheet1.OptionButton1.Value = True Then
@@ -115,8 +92,7 @@ If Sheet1.OptionButton1.Value = True Then
                     
                     VarDeclaredIn = xNodeList.Item(I).Attributes.Item(0).NodeValue 'Gets POU Name
                      
-    '##################  Structures  ##################
-                    
+                    '##################  Structures  ##################                
                     If sStructFound = "1" Then  'You got a structure on your hands
                         
                         Dim m As Integer
@@ -147,8 +123,7 @@ If Sheet1.OptionButton1.Value = True Then
                            
                     End If
                     
-    '##################  TypeSimple  ##################
-                    
+                   '##################  TypeSimple  ##################                
                    If sStructFound = "0" Then
                         If InStr(sDataType, "T_ARRAY") = 0 Then 'Makes sure it isn't array and if it isn't then we start to populate
                                     Col = Col + 1
@@ -158,7 +133,7 @@ If Sheet1.OptionButton1.Value = True Then
                          End If
                    End If
                                         
-    '##################  ARRAYS  ##################
+                    '##################  ARRAYS  ##################
                     If InStr(sDataType, "T_ARRAY") = 1 Then ' end if 1
                           ApplicationVarType = "Array"
                             
@@ -204,7 +179,6 @@ If Sheet1.OptionButton1.Value = True Then
                                                                             End If
                                                                         Next
                                                         Else
-                                                        
                                                                 For C = 0 To Item.ChildNodes.Item(0).Attributes.Item(1).nodeTypedValue
                                                                 
                                                                         Set ApplicationVarName = mainWorkBook.Sheets(xNodeList.Item(I).Attributes.Item(0).nodeTypedValue).Cells(Col, 1)
@@ -219,7 +193,6 @@ If Sheet1.OptionButton1.Value = True Then
                                                                         Col = Col + 1
                                                                         a = 0
                                                                 Next
-                                                                
                                                         End If
                                                     End If
                                                 End If
@@ -232,18 +205,12 @@ If Sheet1.OptionButton1.Value = True Then
                     mainWorkBook.Sheets(xNodeList.Item(I).Attributes.Item(0).nodeTypedValue).Columns("A:F").AutoFit
               Next
         End If
-        
     Else
-    
-        '################################################################################################################################################################################
-
         Set oXMLFile = New MSXML2.DOMDocument60
         Set mainWorkBook = ActiveWorkbook
-            
         XMLFileName = Sheet1.TextBox1.Text
         
         If oXMLFile.Load(XMLFileName) Then
-          
             statusBit = 1
             Set xTypeList = oXMLFile.DocumentElement.ChildNodes.Item(1).ChildNodes
             Set xDataStructures = xTypeList
@@ -261,10 +228,8 @@ If Sheet1.OptionButton1.Value = True Then
         End If
                    
         Sheet = 1
-        
-        
+              
     If statusBit = 1 Then
-    
         Worksheets.Add(After:=Worksheets(Worksheets.Count)).Name = "New" 'xNodeList.Item(i).Attributes.Item(0).nodeTypedValue 'Add worksheet with name of POU
         SheetName = "New"
         For I = 0 To (xNodeList.Length - 1) 'Indexes through POUs
@@ -284,9 +249,7 @@ If Sheet1.OptionButton1.Value = True Then
                         Col = Col + 1
                      
                 For j = 0 To (xNodeList.Item(I).ChildNodes.Length - 1) 'Indexes through variables
-                                                       
                     sDataType = xNodeList.Item(I).ChildNodes.Item(j).Attributes.Item(1).nodeTypedValue 'Looks at the attribute to see what the data type of the PLC variable is
-                                   
                     Set ApplicationVarType = mainWorkBook.Sheets(SheetName).Cells(Col, Row + 1)
                     Set ApplicationVarName = mainWorkBook.Sheets(SheetName).Cells(Col, 1)
                     Set ApplicationVarNodeID = mainWorkBook.Sheets(SheetName).Cells(Col, 2)
@@ -300,10 +263,8 @@ If Sheet1.OptionButton1.Value = True Then
                     
                     VarDeclaredIn = xNodeList.Item(I).Attributes.Item(0).NodeValue 'Gets POU Name
                      
-    '##################  Structures  ##################
-                    
+                    '##################  Structures  ##################
                     If sStructFound = "1" Then  'You got a structure on your hands
-                        
                         VarType = xNodeList.Item(I).ChildNodes.Item(j).Attributes.Item(1).nodeTypedValue
                         VarName = xNodeList.Item(I).ChildNodes.Item(j).Attributes.Item(0).nodeTypedValue
                         
@@ -327,8 +288,7 @@ If Sheet1.OptionButton1.Value = True Then
                            
                     End If
                     
-    '##################  TypeSimple  ##################
-                    
+                   '##################  TypeSimple  ##################
                    If sStructFound = "0" Then
                         If InStr(sDataType, "T_ARRAY") = 0 Then 'Makes sure it isn't array and if it isn't then we start to populate
                                     Col = Col + 1
@@ -338,7 +298,7 @@ If Sheet1.OptionButton1.Value = True Then
                          End If
                    End If
                                         
-    '##################  ARRAYS  ##################
+                    '##################  ARRAYS  ##################
                     If InStr(sDataType, "T_ARRAY") = 1 Then ' end if 1
                           ApplicationVarType = "Array"
                             
@@ -410,8 +370,6 @@ If Sheet1.OptionButton1.Value = True Then
                     mainWorkBook.Sheets(SheetName).Columns("A:F").AutoFit
               Next
         End If
-        
-        '############################################################################################
     End If
 End Sub
 
