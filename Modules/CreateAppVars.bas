@@ -67,7 +67,7 @@ End Sub
 '########################### Create Application Vars ###########################
 Public Sub CreateApplicationVars()
 
-If statusBit = 0 Then  '9/17/2020 this is right.  For some reason you had to change to look for 0 not 1.  Status bit must not be working right
+If statusBit = 0 Then  
 
     XMLFileName = Sheet1.TextBox1.Text
     
@@ -79,7 +79,7 @@ If statusBit = 0 Then  '9/17/2020 this is right.  For some reason you had to cha
     Set xTypeList = oXMLFile.DocumentElement.ChildNodes.Item(1).ChildNodes
     Set xNodeList = oXMLFile.DocumentElement.ChildNodes.Item(2).ChildNodes.Item(0).ChildNodes
      
-    'This looks to see if the "Application Vars" sheets has already been created or not
+    'Looks to see if the "Application Vars" sheets has already been created or not
     Dim ws As Worksheet
     Dim iCounter As Integer
     
@@ -130,7 +130,6 @@ If statusBit = 0 Then  '9/17/2020 this is right.  For some reason you had to cha
                             ApplicationVarType.Value = xGetType.SelectDataType(sDataType) 'Calls function that gets the data types
                                                                        
                             '##################  ARRAYS  ##################
-                
                             If InStr(sDataType, "T_ARRAY") > 0 Then
                                 For Each TypeObject In xTypeList 'This will go through the entire typelist looking for "TypeArray"
                                         If TypeObject.nodeName = "TypeArray" Then 'If type if found to be of type array then we go inside the loop to find the specific array that matches the current var type
