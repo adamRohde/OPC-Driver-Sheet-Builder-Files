@@ -27,7 +27,6 @@ Public Function SelectDataType(DataType As String)
                     End If
                     
                     '##################  BYTE  ##################
-                    
                      If DataType = "T_BYTE" Then
                         Element(1) = "Integer"
                         Element(2) = "0"
@@ -36,7 +35,6 @@ Public Function SelectDataType(DataType As String)
                     End If
                     
                     '##################  WORD  ##################
-                    
                      If DataType = "T_WORD" Then
                         Element(1) = "Integer"
                         Element(2) = "0"
@@ -59,7 +57,6 @@ Public Function SelectDataType(DataType As String)
                     End If
                     
                     '##################  INTS  ##################
-                    
                      If DataType = "T_SINT" Then
                         Element(1) = "Integer"
                         Element(2) = "0"
@@ -118,7 +115,6 @@ Public Function SelectDataType(DataType As String)
                     
                      
                     '##################  REALS  ##################
-                    
                     If DataType = "T_REAL" Then
                         Element(1) = "Real"
                         Element(2) = "0"
@@ -156,7 +152,6 @@ Public Function SelectDataType(DataType As String)
                     End If
                     
                     '##################  User Defined Data Structures  ##################
-                    
                     Dim I As Integer
                     For I = 0 To (Sheet1.ListBox1.ListCount - 1)
                         If DataType = "T_" & Sheet1.ListBox1.List(I) Then
